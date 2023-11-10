@@ -1,44 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import SectionTitle from './SectionTitle';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Pagination } from 'swiper/modules';
+import PopularList from './PopularList';
+
 const Popular = () => {
-    const [popular, setPopular] = useState([])
-    console.log(popular);
+    const [Food, setFood] = useState([])
+  
     useEffect(() => {
         fetch("menu.json")
             .then(res => res.json())
-            .then(data => setPopular(data))
+            .then(data => setFood(data))
     }, [])
+
+    const popular = Food.filter(food =>food.category==="popular")
+    console.log(popular);
+
     return (
         <>
             <div>
                 <SectionTitle
-                    heading="ORDER ONLINE"
-                    subHeading="---From 11:00am to 10:00pm---"
+                    heading="FROM OUR MENU"
+                    subHeading="---Check It Out---"
                 >
                 </SectionTitle>
 
             </div>
 
-            <div>
-                <Swiper
-                    slidesPerView={3}
-                    spaceBetween={30}
-                    pagination={{
-                        clickable: true,
-                    }}
-                    modules={[Pagination]}
-                    className="mySwiper"
-                >
-                    {
-                        popular.filter()
-                    }
-                    <SwiperSlide>Slide 1</SwiperSlide>
-
-                </Swiper>
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-x-16 space-y-5'>
+             {
+                popular.map(food=><PopularList key={food._id} item={food}></PopularList>)
+             }
             </div>
         </>
     );
