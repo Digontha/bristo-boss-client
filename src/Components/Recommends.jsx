@@ -6,7 +6,7 @@ const Recommends = () => {
     const [Food, setFood] = useState([])
   
     useEffect(() => {
-        fetch("menu.json")
+        fetch("http://localhost:5000/menu")
             .then(res => res.json())
             .then(data => setFood(data))
     }, [])
