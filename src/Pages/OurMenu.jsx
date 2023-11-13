@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Cover from '../Components/Cover';
 import menuBG from "../assets/menu/banner3.jpg"
 import SectionTitle from '../Components/SectionTitle';
@@ -10,8 +10,10 @@ import sopuBG from "../assets/menu/soup-bg.jpg"
 import saladBG from "../assets/menu/salad-bg.jpg"
 
 
+
 const OurMenu = () => {
     const [Food] = useMenu()
+    
     const offer = Food?.filter(food => food.category ===  "offered")
     const dessert = Food?.filter(food => food.category ===  "dessert")
     const pizza = Food?.filter(food => food.category ===  "pizza")
@@ -41,6 +43,7 @@ const OurMenu = () => {
                 <div>
                     <UseCategory
                     items={offer}
+                   
                     >
 
                     </UseCategory>
@@ -54,6 +57,7 @@ const OurMenu = () => {
                 <div>
                     <UseCategory
                     items={dessert}
+                    title="dessert"
                     >
 
                     </UseCategory>
@@ -67,6 +71,7 @@ const OurMenu = () => {
                 <div>
                     <UseCategory
                     items={pizza}
+                    title="pizza"
                     >
 
                     </UseCategory>
@@ -80,6 +85,7 @@ const OurMenu = () => {
                 <div>
                     <UseCategory
                     items={soup}
+                    title="soup"
                     >
 
                     </UseCategory>
@@ -92,6 +98,7 @@ const OurMenu = () => {
                 <div>
                     <UseCategory
                     items={salad}
+                    title="salad"
                     >
 
                     </UseCategory>
