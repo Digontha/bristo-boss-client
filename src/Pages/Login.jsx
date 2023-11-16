@@ -1,16 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import image from "../assets/others/authentication.gif"
 import imageBG from "../assets/others/authentication.png"
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Login = () => {
     const BG = {
         backgroundImage: `url(${imageBG})`
     }
+    const { signIn } = useContext(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
+    console.log(location);
     const handleLogin = (e) => {
+        e.preventDefault();
         const form = e.target
         const email = form.email.value
         const password = form.password.value
-        console.log(email,password);
+        console.log(email, password);
+
+        signIn(email, password)
+            .then(res => {
+                console.log(res.user)
+                navigate(location?.state? location.state:"/")
+            })
+            .catch(err => console.log(err))
     }
     return (
         <>
@@ -42,7 +56,7 @@ const Login = () => {
                                     <button className="btn btn-neutral btn-outline">Login</button>
                                 </div>
                             </form>
-                            <div  className="text-center">
+                            <div className="text-center">
                                 <p>Haven't any account? please <Link to="/register" className="text-purple-800 font-semibold">Register</Link></p>
                             </div>
                         </div>
