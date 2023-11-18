@@ -1,14 +1,24 @@
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider/AuthProvider';
+import useCart from '../UseHook.jsx/useCart';
 
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
+
+    const [cart]=useCart()
     const navLinks = <>
         <NavLink to="/"><li><a>Home</a></li></NavLink>
         <NavLink to="/menu"><li><a>Menu</a></li></NavLink>
         <NavLink to="/order/salad"><li><a>Order Now</a></li></NavLink>
+        <NavLink to="/dashboard"><li><a>Dashboard</a></li></NavLink>
+        <NavLink to="">
+            <button className="btn">
+                Cart
+                <div className="badge">+{cart.length}</div>
+            </button></NavLink>
+
     </>
     const handleLogout = () => {
         logOut();
@@ -38,14 +48,14 @@ const Navbar = () => {
             </div>
 
             {user ?
-                <div  className="navbar-end">
+                <div className="navbar-end">
                     <div className="dropdown dropdown-end">
-                    <img tabIndex={0} className='w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
-                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                        <li className='text-black'><a>{user?.displayName}</a></li>
-                        <button onClick={handleLogout} className="btn btn-success btn-outline">Log out</button>
-                    </ul>
-                </div>
+                        <img tabIndex={0} className='w-10 h-10 rounded-full' src={user?.photoURL} alt="" />
+                        <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                            <li className='text-black'><a>{user?.displayName}</a></li>
+                            <button onClick={handleLogout} className="btn btn-success btn-outline">Log out</button>
+                        </ul>
+                    </div>
                 </div>
                 :
                 <div className="navbar-end">

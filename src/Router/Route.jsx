@@ -6,6 +6,11 @@ import Order from "../Pages/Order";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import Dashboard from "../Pages/Dashboard";
+import AdminHome from "../Pages/AdminHome";
+import ManageItem from "../Pages/ManageItem";
+import AddItem from "../Pages/AddItem";
+import AllUsers from "../Pages/AllUsers";
 
 const router = createBrowserRouter([
     {
@@ -37,5 +42,30 @@ const router = createBrowserRouter([
         }
       ]
     },
+    {
+        path:"/dashboard",
+        element:<Dashboard></Dashboard>,
+        children:[
+            {
+                path:"/dashboard",
+                element:<AdminHome></AdminHome>
+            },
+            {
+                path:"/dashboard/manageItem",
+                element:<ManageItem></ManageItem>
+            }
+            ,
+            {
+                path:"/dashboard/AddItem",
+                element:<AddItem></AddItem>
+            }
+            ,
+            {
+                path:"/dashboard/users",
+                element:<AllUsers></AllUsers>
+            }
+        ]
+        
+    }
   ]);
   export default router;
